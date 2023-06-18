@@ -6,7 +6,6 @@ SPOTIFY_FORMAT = "%Y-%m-%d %H:%M"
 STRUCTURE_FORMAT = "%Y-%m-%d"
 
 def rankWeek(currentWeekRank, args):
-    # print(currentWeekRank)
     ret = {}
     for item in currentWeekRank:
         if currentWeekRank[item] >= args.cutoff:
@@ -22,7 +21,7 @@ def create_structure(args):
         f = open(file, "r")
         data = json.loads(f.read())
         for item in data:
-            date = datetime.strptime(item["endTime"], SPOTIFY_FORMAT)
+            date = datetime.strptime(item["endTime"], SPOTIFY_FORMAT).date()
             week = date + timedelta(days=-date.weekday())
             if week != currentWeek:
                 if currentWeek != None:
@@ -31,13 +30,13 @@ def create_structure(args):
                 currentWeekRank = {}
             formattedName = f'{item["artistName"]} - {item["trackName"]}'
             if formattedName in currentWeekRank:
-                print("here")
-                print(currentWeekRank[formattedName])
                 currentWeekRank[formattedName] += item["msPlayed"]
-                print(currentWeekRank[formattedName])
             else:
                 currentWeekRank[formattedName] = item["msPlayed"]
         f.close()
+    
+    if currentWeek != None:
+        structure[currentWeek.strftime(STRUCTURE_FORMAT)] = rankWeek(currentWeekRank, args)
     
     f = open(args.output, "w")
     f.write(json.dumps(structure))
