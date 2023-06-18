@@ -10,8 +10,7 @@ def rankWeek(currentWeekRank, args):
     for item in currentWeekRank:
         if currentWeekRank[item] >= args.cutoff:
             ret[item] = currentWeekRank[item]
-    # TODO: sort
-    return ret
+    return dict(sorted(ret.items(), key=lambda x:x[1], reverse=True))
 
 def create_structure(args):
     currentWeek = None
