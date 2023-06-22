@@ -10,6 +10,7 @@ def rankWeek(currentWeekRank, args):
     for item in currentWeekRank:
         if currentWeekRank[item] >= args.cutoff:
             ret[item] = currentWeekRank[item]
+    # creative solution from https://www.freecodecamp.org/news/sort-dictionary-by-value-in-python/
     return dict(sorted(ret.items(), key=lambda x:x[1], reverse=True))
 
 def create_structure(args):
@@ -44,8 +45,8 @@ def create_structure(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Parse Spotify data")
-    parser.add_argument('-i', '--input', nargs='+', default=[], help="Input data files")
-    parser.add_argument('-o', '--output', help="Output data file")
-    parser.add_argument('-c', '--cutoff', help="Ms cutoff", type=int)
+    parser.add_argument('-i', '--input', nargs='+', default=[], help="Input data files", required=True)
+    parser.add_argument('-o', '--output', help="Output data file", required=True)
+    parser.add_argument('-c', '--cutoff', help="Ms cutoff", type=int, required=True)
     args = parser.parse_args()
     create_structure(args)
