@@ -14,6 +14,7 @@ This program takes Spotify's streaming history data and aggregates it weekly to 
   - `CUTOFF` is the minimum amount of total listening time of a song across a week to appear in the aggregated data in ms
 * For example, if the downloaded data has 2 relevant data files `StreamingHistory0.json` and `StreamingHistory1.json`, the intended output is `Aggregated.json`, and you would like to see any songs listened to for more than 5 minutes in total across a given week (300000 ms), run `python spotify.py -i StreamingHistory0.json StreamingHistory1.json -o Aggregated.json -c 300000`
 * Expected output should look like
+	```
     "2022-11-07": {
 		"Jon Batiste - San Spirito": 580105,
 		"Lin-Manuel Miranda - In the Heights": 493102,
@@ -31,3 +32,4 @@ This program takes Spotify's streaming history data and aggregates it weekly to 
 		"Couch - Stand Up": 301278
     },
     ...
+	```
