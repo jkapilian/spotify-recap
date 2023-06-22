@@ -33,3 +33,9 @@ This program takes Spotify's streaming history data and aggregates it weekly to 
     },
     ...
 	```
+## Notes and Future Features
+* Adding flexibility to aggregation through additional command line arguments
+  - Currently, the only aggregation timestep is weekly starting on Mondays
+  - In addition to time cutoff, options of top N songs each interval could also be useful
+* Front-end wrapper
+  - The addition of a front-end in addition to the command line tool could lead to other visual ways of displaying the aggregate data while making the tool more accessible
