@@ -4,15 +4,16 @@ This program takes Spotify's streaming history data and aggregates it weekly to 
 ### Obtaining the Data
 * Go to https://www.spotify.com/us/account/privacy/ and log in with your account
 * Click on either "Your Account Data" or "Prepare Extended streaming history"
-  - The Account Data only includes listening history from the past year but takes less time to prepare while the extended streaming history includes data dating back to account creation
+  - The Account Data only includes listening history from the past year but takes less time to prepare while the extended streaming history includes data dating back to account creation but takes roughly a month to receive the data
 * Wait for an email to download account data as a ZIP
 ### Running the Script
 * Clone this repo locally
-* Run `python spotify.py -i INPUT -o OUTPUT -c CUTOFF` where
+* Run `python spotify.py -i INPUT -o OUTPUT -c CUTOFF [-e]` where
   - `INPUT` is a space-separated list of chronological Spotify data
   - `OUTPUT` is the intended destination of the aggregated data
   - `CUTOFF` is the minimum amount of total listening time of a song across a week to appear in the aggregated data in ms
-* For example, if the downloaded data has 2 relevant data files `StreamingHistory0.json` and `StreamingHistory1.json`, the intended output is `Aggregated.json`, and you would like to see any songs listened to for more than 5 minutes in total across a given week (300000 ms), run `python spotify.py -i StreamingHistory0.json StreamingHistory1.json -o Aggregated.json -c 300000`
+  - `-e` flag is included if extended data is used (**WARNING**: Spotify formats data differently for "Account Data" vs. Extended streaming history" so setting this flag incorrectly will cause the data to not be aggregated properly)
+* For example, if the downloaded data has 2 relevant data files `StreamingHistory0.json` and `StreamingHistory1.json`, they come from the basic "Account Data" export, the intended output is `Aggregated.json`, and you would like to see any songs listened to for more than 5 minutes in total across a given week (300000 ms), run `python spotify.py -i StreamingHistory0.json StreamingHistory1.json -o Aggregated.json -c 300000`
 * Expected output should look like
 	```
     "2022-11-07": {
